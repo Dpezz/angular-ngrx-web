@@ -3,6 +3,7 @@ import { Store, select } from '@ngrx/store';
 import { logout } from '../store/actions/login.actions';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { authSuccess } from '../store/actions/auth.actions';
 
 export interface AppState {
     user: Object;
@@ -21,6 +22,9 @@ export class AppComponent {
 
     constructor(private store: Store, private store$: Store<{ auth: any }>) {
         this.auth$ = this.store$.pipe(select('auth'));
+        const user_storage = localStorage.getItem('user');
+        console.log(user_storage);
+        this.store.dispatch(authSuccess({user:JSON.parse(user_storage)}));
     }
 
     ngOnInit() {

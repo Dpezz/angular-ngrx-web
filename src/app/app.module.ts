@@ -13,7 +13,7 @@ import { HomeComponent } from './components/home/home.component';
 import { JwtModule } from '@auth0/angular-jwt';
 import { HttpClientModule } from '@angular/common/http';
 
-import { StoreModule } from '@ngrx/store';
+import { StoreModule, ActionReducer, MetaReducer } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { EffectsModule } from '@ngrx/effects';
 import { environment } from 'src/environments/environment';
@@ -30,7 +30,12 @@ export function tokenGetter() {
 }
 
 @NgModule({
-    declarations: [AppComponent, LoginComponent, HomeComponent, RegisterComponent],
+    declarations: [
+        AppComponent,
+        LoginComponent,
+        HomeComponent,
+        RegisterComponent,
+    ],
     imports: [
         BrowserModule,
         AppRoutingModule,
@@ -49,6 +54,7 @@ export function tokenGetter() {
             count: counterReducer,
             auth: authReducer,
         }),
+
         StoreDevtoolsModule.instrument({
             maxAge: 25,
             logOnly: environment.production,
